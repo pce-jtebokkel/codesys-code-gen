@@ -22,9 +22,9 @@ def null_value(val, member: str) -> str:
     if val is not None:
         return f"{val!s}"
     if member.startswith("rl"):
-        return "TMT.gConst.gc_rlNULL"
+        return "gConst.gc_rlNULL"
     elif member.startswith("dt"):
-        return "TMT.gConst.gc_dtNULL"
+        return "gConst.gc_dtNULL"
     else:
         return "0"
 
@@ -40,7 +40,7 @@ def assign_member(path: List[Any], var_name: str, indent_level: int) -> str:
         if type(val) is datetime:
             sVal = f"DT#{val.year}-{val.month}-{val.day}-{val.hour}:{val.minute}:{val.second}"
         if val is None:
-            sVal = "TMT.gConst.gc_dtNULL"
+            sVal = "gConst.gc_dtNULL"
     if type(val) is str:
         sVal = f"'{val}'"
     level = "\t" * indent_level
