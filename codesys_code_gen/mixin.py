@@ -82,16 +82,16 @@ def dot_join_identifiers(path_leaf) -> List[str]:
 
 
 class AsCodesysMixin:
-    def to_codesys(self, var_name: str, indent_level: int = 0) -> str:
+    def to_codesys(self, var_name: str, indent_level: int = 0) -> List[str]:
         """Convert to codesys code"""
 
         code = [
             assign_member(path, var_name, indent_level)
             for path in get_leaf_paths(attrs.asdict(self))
         ]
-        return "".join(code)
+        return code
 
-    def to_assert(self, expected: str, actual: str, indent_level: int = 0) -> str:
+    def to_assert(self, expected: str, actual: str, indent_level: int = 0) -> List[str]:
         """Convert to AssertEquals"""
         level = "\t" * indent_level
         paths = get_leaf_paths(attrs.asdict(self))
@@ -106,11 +106,11 @@ class AsCodesysMixin:
                 code.append(
                     f"{level}AssertEquals({expected}.{key}, {actual}.{key}, '{key} should match');\n"
                 )
-        return "".join(code)
+        return code
 
     def to_assert_indexed(
         self, expected: str, actual: str, indent_level: int = 0
-    ) -> str:
+    ) -> List[str]:
         """Convert to AssertEquals"""
         level = "\t" * indent_level
         paths = get_leaf_paths(attrs.asdict(self))
@@ -129,16 +129,16 @@ class AsCodesysMixin:
                     f"concat('ix: ', concat(INT_TO_STRING(ix), ' {key} should match')));\n"
                 )
 
-        return "".join(code)
+        return code
 
-    def to_codesys_max(self, var_name: str, indent_level: int = 0) -> str:
+    def to_codesys_max(self, var_name: str, indent_level: int = 0) -> List[str]:
         """Convert to codesys code"""
 
         code = [
             max_member_str_length(key[:-1], var_name, indent_level)
             for key in get_leaf_paths(attrs.asdict(self))
         ]
-        return "".join(code)
+        return code
 
     def to_structured_data(self, var_name: str, indent_level: int = 0) -> List[str]:
         """Generate appending STU code for each struct"""
