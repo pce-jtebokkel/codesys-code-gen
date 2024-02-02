@@ -6,8 +6,8 @@ authors = ["John te Bokkel <john@powercoreeng.com>"]
 
 [tool.poetry.dependencies]
 python = "^3.8"
-attrs = "^21.4.0"
-boltons = "^21.0.0"
+attrs = "^23.2.0"
+boltons = "^23.1.1"
 
 [tool.poetry.dev-dependencies]
 pytest = "^6.2"
