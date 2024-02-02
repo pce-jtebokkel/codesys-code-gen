@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "codesys-code-gen"
-version = "v1.1.0"
+version = "1.1.1"
 description = ""
 authors = ["John te Bokkel <john@powercoreeng.com>"]
 
