@@ -1,8 +1,9 @@
 """Codesys attrs mixin and helper functions."""
-import attrs
-from boltons.iterutils import remap, default_visit, flatten
-from typing import Dict, List, Any
 from datetime import datetime
+from typing import Any, Dict, List
+
+import attrs
+from boltons.iterutils import default_visit, flatten, remap
 
 
 def get_leaf_paths(obj: Dict[str, Any]) -> List[Any]:
@@ -10,7 +11,7 @@ def get_leaf_paths(obj: Dict[str, Any]) -> List[Any]:
 
     def visit_collect_leaves(p, k, v):
         ret = default_visit(p, k, v)
-        if type(v) is not dict:
+        if not isinstance(v, dict):
             paths.append((p, k, v))
         return ret
 
@@ -41,7 +42,7 @@ def assign_member(path: List[Any], var_name: str, indent_level: int) -> str:
             sVal = f"DT#{val.year}-{val.month}-{val.day}-{val.hour}:{val.minute}:{val.second}"
         if val is None:
             sVal = "gConst.gc_dtNULL"
-    if type(val) is str:
+    if isinstance(val, str):
         sVal = f"'{val}'"
     level = "\t" * indent_level
     full_path = ".".join(path)
@@ -120,13 +121,13 @@ class AsCodesysMixin:
             if key.startswith("rl") or ".rl" in key:
                 code.append(
                     f"{level}AssertEquals_REAL({expected}[ix].{key}, {actual}[ix].{key}, 0.0001, "
-                    f"concat('ix: ', concat(INT_TO_STRING(ix), ' {key} should match')));\n"
+                    f"CONCAT('ix: ', CONCAT(TO_STRING(ix), ' {key} should match')));\n"
                 )
 
             else:
                 code.append(
                     f"{level}AssertEquals({expected}[ix].{key}, {actual}[ix].{key}, "
-                    f"concat('ix: ', concat(INT_TO_STRING(ix), ' {key} should match')));\n"
+                    f"CONCAT('ix: ', CONCAT(TO_STRING(ix), ' {key} should match')));\n"
                 )
 
         return code
