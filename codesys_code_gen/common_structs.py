@@ -1,5 +1,4 @@
 import re
-from typing import Optional
 
 import attrs
 
@@ -29,14 +28,14 @@ class AlarmElement:
     AeClass: str = attrs.field(default="")
     sMessage: str = attrs.field(default="")
 
-    reLine = re.compile(
+    reLine: re.Pattern[str] = re.compile(
         (
             r"^.*alarm *:= *(?P<alarm>[^, ]*)[, ]*xLatch *:= *(?P<xLatch>(TRUE|FALSE))"
             r".*iPriority *:= *(?P<iPriority>[0-9]+).*iGroup *:= *(?P<iGroup>[0-9]+).*"
             r"AeClass *:= *(?P<AeClass>[^, ]*)[, ]*sMessage *:= *'(?P<sMessage>[^']*)'.*$"
         )
     )
-    reDecl = re.compile(
+    reDecl: re.Pattern[str] = re.compile(
         (r"^[ \t]*(?P<pre>x[tew]|lim)(?P<alarm>[^ :]+)[^/]*(//)*(?P<comment>.*)?$")
     )
 
@@ -49,14 +48,16 @@ class AlarmElement:
         )
 
     @classmethod
-    def from_line(cls, line):
+    def from_line(cls, line: str):
         m = cls.reLine.match(line)
         if m is not None:
             return cls(**m.groupdict())
         pass
 
     @classmethod
-    def from_declaration(cls, line: str, comment: Optional[str] = None, gvl="gAlarm"):
+    def from_declaration(
+        cls, line: str, comment: str | None = None, gvl: str = "gAlarm"
+    ):
         m = cls.reDecl.match(line.strip())
         if m is not None:
             if m.group("alarm") == "NULL":
@@ -94,7 +95,7 @@ class AlarmElement:
             return cls(
                 alarm=f"{gvl}.{m.group('pre')}{m.group('alarm')}",
                 AeClass=aec,
-                sMessage=comment,
+                sMessage=comment or "",
                 iGroup=grp,
                 iPriority=pri,
             )

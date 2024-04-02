@@ -1,33 +1,31 @@
 """Codesys data types/type aliases"""
-from typing import Optional
+
 from datetime import datetime
+from typing import TypeAlias
 
-
-REAL = Optional[float]
-LREAL = Optional[float]
-DATE_AND_TIME = Optional[datetime]
-DT = DATE_AND_TIME
-TIME = Optional[int]
-LTIME = Optional[int]
-STRING = Optional[str]
-WSTRING = Optional[str]
-TIME = Optional[int]
-LTIME = Optional[int]
-BOOL = Optional[bool]
+REAL: TypeAlias = float | None
+LREAL: TypeAlias = float | None
+DATE_AND_TIME: TypeAlias = datetime | None
+DT: TypeAlias = DATE_AND_TIME
+TIME: TypeAlias = int | None
+LTIME: TypeAlias = int | None
+STRING: TypeAlias = str | None
+WSTRING: TypeAlias = str | None
+BOOL: TypeAlias = bool | None
 
 # Integer Types
-BYTE = Optional[int]
-WORD = Optional[int]
-DWORD = Optional[int]
-LWORD = Optional[int]
-SINT = Optional[int]
-USINT = Optional[int]
-INT = Optional[int]
-UINT = Optional[int]
-DINT = Optional[int]
-UDINT = Optional[int]
-LINT = Optional[int]
-ULINT = Optional[int]
-UXINT = Optional[int]
-XINT = Optional[int]
-XWORD = Optional[int]
+BYTE: TypeAlias = int | None
+WORD: TypeAlias = int | None
+DWORD: TypeAlias = int | None
+LWORD: TypeAlias = int | None
+SINT: TypeAlias = int | None
+USINT: TypeAlias = int | None
+INT: TypeAlias = int | None
+UINT: TypeAlias = int | None
+DINT: TypeAlias = int | None
+UDINT: TypeAlias = int | None
+LINT: TypeAlias = int | None
+ULINT: TypeAlias = int | None
+UXINT: TypeAlias = int | None
+XINT: TypeAlias = int | None
+XWORD: TypeAlias = int | None

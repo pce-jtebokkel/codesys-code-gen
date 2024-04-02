@@ -1,4 +1,5 @@
 """Codesys attrs mixin and helper functions."""
+
 from datetime import datetime
 from typing import Any, Dict, List
 
@@ -19,7 +20,7 @@ def get_leaf_paths(obj: Dict[str, Any]) -> List[Any]:
     return [flatten(x) for x in paths]
 
 
-def null_value(val, member: str) -> str:
+def null_value(val: Any, member: str) -> str:
     if val is not None:
         return f"{val!s}"
     if member.startswith("rl"):
@@ -74,11 +75,11 @@ def max_member_str_length(
     return f"{level}{var_name}.{full_path} := {sVal};\n"
 
 
-def dot_join_identifiers(path_leaf) -> List[str]:
+def dot_join_identifiers(path_leaf: List[List[str | int | float | None]]) -> List[str]:
     # get_leaf_paths returns a list of elements. The elements contain a list of
     # the identifier path with the last element in that list being the object
     # value. We strip out the value and then join the identifiers with a `.`
-    paths = [x[:-1] for x in path_leaf]
+    paths: List[List[str]] = [x[:-1] for x in path_leaf]
     return [".".join(x) for x in paths]
 
 
