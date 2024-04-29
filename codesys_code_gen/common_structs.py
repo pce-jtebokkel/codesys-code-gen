@@ -1,7 +1,7 @@
 import re
 
 import attrs
-from pylatex.utils import latex_escape
+from pylatex.utils import escape_latex
 
 from .converters import try_float
 from .types import REAL
@@ -49,7 +49,7 @@ class AlarmElement:
         )
 
     def as_latex(self) -> str:
-        return f"{latex_escape(self.alarm)} & {self.iPriority} & {latex_escape(self.sMessage)} \\\\"
+        return f"{escape_latex(self.alarm)} & {self.iPriority} & {escape_latex(self.sMessage)} \\\\"
 
     @classmethod
     def from_line(cls, line: str):
