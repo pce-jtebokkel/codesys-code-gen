@@ -19,7 +19,7 @@ class VibGroupSimple:
     nd: VibTriAxisSimple = attrs.field(default=VibTriAxisSimple())
 
 
-@attrs.define
+@attrs.define(auto_attribs=False)
 class AlarmElement:
     alarm: str = attrs.field(default="")
     xLatch: str = attrs.field(default="TRUE")
