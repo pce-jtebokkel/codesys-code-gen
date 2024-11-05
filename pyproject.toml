@@ -1,13 +1,13 @@
 [tool.poetry]
 name = "codesys-code-gen"
-version = "1.1.8"
+version = "1.2.0"
 description = ""
 authors = ["John te Bokkel <john@powercoreeng.com>"]
 
 [tool.poetry.dependencies]
 python = "^3.8"
-attrs = "^23.2.0"
-boltons = "^23.1.1"
+attrs = "^24.0.0"
+boltons = "^24.0.0"
 pylatex = "^1.4.2"
 
 [tool.poetry.dev-dependencies]
