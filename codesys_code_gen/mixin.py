@@ -27,7 +27,7 @@ def null_value(val: Any, member: str) -> str:
         return "gConst.gc_rlNULL"
     elif member.startswith("dt"):
         return "gConst.gc_dtNULL"
-    elif isinstance(val, str):
+    elif member.startswith("s"):
         return "''"
     else:
         return "0"
